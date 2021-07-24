@@ -116,3 +116,9 @@ The other part of the answer is functional programming.
 In Spring MVC, and servlet applications in general, it is assumed that applications *may block* the current thread, e.g. for remote calls, and for this reason servlet containers use a large thread pool, to absorb potential blocking during request handling.
 
 In Spring WebFlux, and non-blocking servers in general, it is assumed that applications *will not block*, and therefore non-blocking servers use a small, fixed-size thread pool (event loop workers) to handle requests.
+
+### WebFlux 核心
+
+[Spring 5 WebFlux: Performance tests](https://blog.ippon.tech/spring-5-webflux-performance-tests/)
+
+No improvement in speed was observed with our reactive apps (the Gatling results are even slightly worse).
