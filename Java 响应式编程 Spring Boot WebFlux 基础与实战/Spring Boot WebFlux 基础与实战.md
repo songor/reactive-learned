@@ -84,3 +84,7 @@ orders.stream().collect(Collectors.groupingBy(Order::getType));
 orders.stream().collect(Collectors.groupingBy(Order::getType, Collectors.counting()));
 ```
 
+### Spring WebFlux
+
+[在 Windows 上安装 MongoDB 社区版](https://www.docs4dev.com/docs/zh/mongodb/v3.6/reference/tutorial-install-mongodb-on-windows.html)
+
