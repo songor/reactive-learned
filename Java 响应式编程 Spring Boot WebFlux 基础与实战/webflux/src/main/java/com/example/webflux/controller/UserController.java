@@ -39,8 +39,9 @@ public class UserController {
   }
 
   @GetMapping("/{id}")
-  public Mono<User> getById(@PathVariable("id") String id) {
-    return this.userRepository.findById(id);
+  public Mono<ResponseEntity<User>> getById(@PathVariable("id") String id) {
+    return this.userRepository.findById(id).map(usr -> new ResponseEntity<>(usr, HttpStatus.OK))
+        .defaultIfEmpty(new ResponseEntity<>(HttpStatus.NOT_FOUND));
   }
 
   @GetMapping(value = "/stream/{id}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)

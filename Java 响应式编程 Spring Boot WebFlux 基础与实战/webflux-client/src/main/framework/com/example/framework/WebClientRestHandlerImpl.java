@@ -1,9 +1,11 @@
 package com.example.framework;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClient.RequestBodySpec;
 import org.springframework.web.reactive.function.client.WebClient.ResponseSpec;
+import reactor.core.publisher.Mono;
 
 public class WebClientRestHandlerImpl implements RestHandler {
 
@@ -27,6 +29,9 @@ public class WebClientRestHandlerImpl implements RestHandler {
     } else {
       responseSpec = requestBodySpec.retrieve();
     }
+
+    responseSpec.onStatus(HttpStatus::is4xxClientError,
+        clientResponse -> Mono.error(new RuntimeException(clientResponse.statusCode().name())));
 
     Object result;
     if (methodInfo.getReturnFlux()) {
