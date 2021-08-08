@@ -38,6 +38,16 @@ public class UserController {
     return this.userRepository.findAll();
   }
 
+  @GetMapping("/{id}")
+  public Mono<User> getById(@PathVariable("id") String id) {
+    return this.userRepository.findById(id);
+  }
+
+  @GetMapping(value = "/stream/{id}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+  public Mono<User> streamGet(@PathVariable("id") String id) {
+    return this.userRepository.findById(id);
+  }
+
   @PostMapping("/")
   public Mono<User> create(@Valid @RequestBody User user) {
     UserValidationUtil.check(user);
